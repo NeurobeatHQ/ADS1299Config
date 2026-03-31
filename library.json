@@ -1,0 +1,30 @@
+{
+    "name": "ADS1299Config",
+    "version": "1.0.0",
+    "description": "Configuration library for boards with ADS1299 analog front-ends. Provides a fluent C++ API for configuring ADS1299 registers via a shadow register map. Supports up to 128 ADC chips (1024 channels) addressed via separate CS pins. Daisy chaining is supported for continuous data readback but not used for register configuration. Transport-agnostic (bring your own SPI driver).",
+    "keywords": "ads1299, analog-frontend, adc, biosignal, neuroscience",
+    "authors": [
+        {
+            "name": "NeurBeat",
+            "email": "lookfwd@gmail.com",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "build": {
+        "srcFilter": [
+            "+<*>"
+        ]
+    },
+    "examples": [
+        {
+            "name": "BasicConfig",
+            "base": "examples/BasicConfig",
+            "files": [
+                "BasicConfig.ino"
+            ]
+        }
+    ]
+}
