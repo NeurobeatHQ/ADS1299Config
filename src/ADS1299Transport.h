@@ -2,7 +2,7 @@
 // Users implement this to wrap their SPI driver.
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 namespace ads1299_config {
 

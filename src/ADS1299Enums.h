@@ -2,7 +2,7 @@
 // Values correspond to the bit-field encodings in the ADS1299 datasheet.
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 namespace ads1299_config {
 

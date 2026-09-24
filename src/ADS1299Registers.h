@@ -2,7 +2,7 @@
 // Reference: ADS1299 datasheet SBAS499C, Table 11 (Register Assignments)
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 namespace ads1299_config {
 namespace reg {

@@ -80,7 +80,9 @@ bool Config::apply() {
     _lastError = nullptr;
 
     for (uint8_t fe = 0; fe < _numFrontends; fe++) {
-        // Send SDATAC to allow register writes
+        // Send SDATAC to allow register writes.
+        // Note: 4 tCLK cycles (~2 us at 2.048 MHz) required after SDATAC
+        // before issuing register R/W commands. Transport must ensure this delay.
         if (!_transport.sendCommand(fe, reg::CMD_SDATAC)) {
             _lastError = "SDATAC failed";
             return false;
@@ -118,7 +120,9 @@ bool Config::apply(const Config& current) {
                     ? _numFrontends : current._numFrontends;
 
     for (uint8_t fe = 0; fe < feCount; fe++) {
-        // Send SDATAC to allow register writes
+        // Send SDATAC to allow register writes.
+        // Note: 4 tCLK cycles (~2 us at 2.048 MHz) required after SDATAC
+        // before issuing register R/W commands. Transport must ensure this delay.
         if (!_transport.sendCommand(fe, reg::CMD_SDATAC)) {
             _lastError = "SDATAC failed";
             return false;
@@ -157,7 +161,9 @@ bool Config::load() {
     _lastError = nullptr;
 
     for (uint8_t fe = 0; fe < _numFrontends; fe++) {
-        // Send SDATAC to allow register reads
+        // Send SDATAC to allow register reads.
+        // Note: 4 tCLK cycles (~2 us at 2.048 MHz) required after SDATAC
+        // before issuing register R/W commands. Transport must ensure this delay.
         if (!_transport.sendCommand(fe, reg::CMD_SDATAC)) {
             _lastError = "SDATAC failed during load";
             return false;

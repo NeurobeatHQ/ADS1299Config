@@ -771,8 +771,8 @@ void test_channel_out_of_bounds() {
     MockTransport transport;
     Config config(transport, 2);
 
-    // Default ID register NU_CH=00 → 4ch per frontend, totalChannels = 8
-    assert(config.totalChannels() == 8);
+    // Default ID register NU_CH=10 → 8ch per frontend, totalChannels = 16
+    assert(config.totalChannels() == 16);
 
     // Accessing channel 9999 should not crash (clamps to last frontend, ch 0)
     auto ch = config.channel(9999);

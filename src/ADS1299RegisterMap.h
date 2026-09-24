@@ -2,7 +2,7 @@
 // Maintains an in-RAM copy of all 24 registers with dirty tracking.
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 #include "ADS1299Registers.h"
 
 namespace ads1299_config {
@@ -12,7 +12,10 @@ public:
     RegisterMap();
 
     // Reset all registers to datasheet default values and clear dirty flags.
-    void resetDefaults();
+    // numChannels sets the NU_CH bits in the ID register shadow (4, 6, or 8).
+    // Defaults to 8 (ADS1299) so that proxy iteration covers all channels
+    // even before load() reads the actual hardware ID register.
+    void resetDefaults(uint8_t numChannels = 8);
 
     // Set a bit field within a register.
     // reg: register address

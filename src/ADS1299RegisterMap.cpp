@@ -6,12 +6,18 @@ RegisterMap::RegisterMap() {
     resetDefaults();
 }
 
-void RegisterMap::resetDefaults() {
+void RegisterMap::resetDefaults(uint8_t numChannels) {
     // Zero everything first
     for (uint8_t i = 0; i < reg::NUM_REGISTERS; i++) {
         _regs[i] = 0x00;
         _dirty[i] = false;
     }
+
+    // Set ID register NU_CH bits so numChannels() returns the correct count
+    // even before load() reads the actual hardware ID register.
+    // NU_CH encoding: 00=4ch, 01=6ch, 10=8ch
+    uint8_t nu_ch = (numChannels >= 8) ? 2 : (numChannels >= 6) ? 1 : 0;
+    _regs[reg::ID] = (nu_ch << reg::ID_NU_CH_SHIFT) & reg::ID_NU_CH_MASK;
 
     // Set datasheet defaults (Table 11)
     _regs[reg::CONFIG1] = reg::CONFIG1_DEFAULT;  // 0x96
